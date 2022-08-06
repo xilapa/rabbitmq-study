@@ -1,3 +1,4 @@
 ﻿using Producer._1___HelloWorld;
+using Producer._2___WorkQueues;
 
-HelloWorld.Produce(args[0]);
+WorkQueues.Produce(args[0]);

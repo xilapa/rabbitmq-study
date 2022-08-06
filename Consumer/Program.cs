@@ -1,3 +1,4 @@
 ﻿using Consumer._1___HelloWorld;
+using Consumer._2___WorkQueues;
 
-HelloWorld.Consume();
+WorkQueues.Consume();
