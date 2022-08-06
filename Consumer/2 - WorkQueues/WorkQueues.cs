@@ -10,6 +10,7 @@ public class WorkQueues
     {
         // Connect to the broker
         var connectionFactory = new ConnectionFactory {HostName = "localhost", UserName = "guest", Password = "guest"};
+        connectionFactory.DispatchConsumersAsync = true;
         using var connection = connectionFactory.CreateConnection();
 
         // get a channel on the connection
@@ -22,14 +23,14 @@ public class WorkQueues
         channel.BasicQos(0,1,false);
 
         // function to consume the message
-        var consumer = new EventingBasicConsumer(channel);
-        consumer.Received += (cons, ea) =>
+        var consumer = new AsyncEventingBasicConsumer(channel);
+        consumer.Received += async (cons, ea) =>
         {
             var msg = JsonSerializer.Deserialize<string>(ea.Body.Span);
             Console.WriteLine($"{DateTime.Now} - Message received: {msg}");
             int dots = msg!.Split('.').Length - 1;
-            Thread.Sleep(dots * 1000);
-            (cons as EventingBasicConsumer)!.Model.BasicAck(ea.DeliveryTag, false);
+            await Task.Delay(dots * 1000);
+            (cons as AsyncEventingBasicConsumer)!.Model.BasicAck(ea.DeliveryTag, false);
             Console.WriteLine($"{DateTime.Now} - Message process done: {msg}");
         };
 
