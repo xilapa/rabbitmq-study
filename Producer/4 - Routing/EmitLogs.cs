@@ -23,7 +23,7 @@ public class EmitLogs
         msgProps.ContentType = "application/json";
         msgProps.DeliveryMode = 1;
 
-        // publishing the message with each routing key
+        // publishing the message using severity as routing key
         channel.BasicPublish("direct_logs", routingKey: severity, msgProps, msgBody);
 
         Console.WriteLine($"Message sent: {message}");
