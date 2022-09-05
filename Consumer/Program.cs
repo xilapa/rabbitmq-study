@@ -2,5 +2,7 @@
 using Consumer._2___WorkQueues;
 using Consumer._3___Publish_Subscribe;
 using Consumer._4___Routing;
+using Consumer._5___Topics;
+using Consumer._6___RPC;
 
-ConsumeLogs.Consume(args);
+RPCServer.Consume();
