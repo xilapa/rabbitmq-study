@@ -4,5 +4,6 @@ using Consumer._3___Publish_Subscribe;
 using Consumer._4___Routing;
 using Consumer._5___Topics;
 using Consumer._6___RPC;
+using Consumer._8___DeadLetterExchange;
 
-RPCServer.Consume();
+DeadLetterExchange.Consume();
